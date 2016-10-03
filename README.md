@@ -9,6 +9,15 @@
 	$ mkdir /Users/matt/development/ubuntu-docker
 	$ cd /Users/matt/development/ubuntu-docker
 	$ vagrant init ubuntu/trusty64
+
+## Update Vagrantfile to Forward Port 8080
+
+Add the following line to Vagrantfile
+
+	config.vm.network "forwarded_port", guest: 8080, host: 8080
+
+## Start Ubuntu Server
+
 	$ vagrant up
 
 ## Install Docker on Ubuntu trusty64
