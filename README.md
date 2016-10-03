@@ -17,6 +17,7 @@
 Add the following line to `/etc/apt/sources.list.d/docker.list`
 
 	deb https://apt.dockerproject.org/repo ubuntu-trusty main
+
 Clean out apt-get caches
 	$ sudo apt-get update
 	$ sudo apt-get purge lxc-docker
