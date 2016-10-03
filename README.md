@@ -61,6 +61,7 @@ To enable memory and swap on system using GNU GRUB (GNU GRand Unified Bootloader
 
 4. Save and close the file.
 5. Update GRUB.
+
 	$ sudo update-grub
 
 6. Reboot server
