@@ -74,3 +74,58 @@ To enable memory and swap on system using GNU GRUB (GNU GRand Unified Bootloader
 	$ sudo update-grub
 
 6. Reboot server
+
+## Download GitHub Repos to Ubuntu Server
+
+### Push SSH Private Key and Config to Server
+
+From local machine:
+
+	$ scp -i .vagrant/machines/default/virtualbox/private_key -P 2222 ~/.ssh/github-pivotal_rsa  vagrant@localhost:.ssh/
+	$ scp -i .vagrant/machines/default/virtualbox/private_key -P 2222 ~/.ssh/config  vagrant@localhost:.ssh/
+
+On Ubuntu Server
+
+	$ chmod 400 .ssh/github-pivotal_rsa
+	$ chmod 644 .ssh/config
+
+Change /home/vagrant/.ssh/config
+
+From
+
+	IdentityFile /Users/matt/.ssh/github-pivotal_rsa
+
+to
+	IdentityFile /home/vagrant/.ssh/github-pivotal_rsa
+
+### Download Git Repos
+
+	git clone git@github.com:Pivotal-Field-Engineering/pcf-ers-demo.git
+	git clone git@github.com:mwalburn/ubuntu-docker.git
+
+## Build Elastic Runtime Demo
+
+### Download Java 1.8
+
+	$ sudo add-apt-repository ppa:webupd8team/java -y
+	$ sudo apt-get update
+	$ sudo apt-get install oracle-java8-installer
+
+### Put Dockerized pom.xml and Dockerfile in place
+
+	cp ubuntu-docker/pom.xml pcf-ers-demo/
+	mkdir pcf-ers-demo/src/main/docker
+	cp ubuntu-docker/Dockerfile pcf-ers-demo/src/main/docker/
+
+### Build SpringBoot JAR and Build Docker Container
+
+	cd pcf-ers-demo
+	./mvnw clean package docker:build
+
+### Validate Docker Image in Docker Engine
+
+	$ docker images
+	
+	REPOSITORY                   TAG                 IMAGE ID            CREATED             SIZE
+	mwalburn/pcf-ers-demo1       latest              b0934d0ea797        23 seconds ago      248.2 MB
+	frolvlad/alpine-oraclejdk8   slim                f8103909759b        9 days ago          167.1 MB
