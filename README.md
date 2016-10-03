@@ -125,7 +125,25 @@ to
 ### Validate Docker Image in Docker Engine
 
 	$ docker images
-	
+
 	REPOSITORY                   TAG                 IMAGE ID            CREATED             SIZE
 	mwalburn/pcf-ers-demo1       latest              b0934d0ea797        23 seconds ago      248.2 MB
 	frolvlad/alpine-oraclejdk8   slim                f8103909759b        9 days ago          167.1 MB
+
+## Start ERS Demo Application on Ubuntu Server:
+
+	$ docker run -p 8080:8080 -t mwalburn/pcf-ers-demo1 &
+
+Validate application by viewing page in web browser at: `http://localhost:8080/`
+
+## Push Docker Image to Docker Hub
+
+	$ docker login
+	$ docker push docker push mwalburn/pcf-ers-demo1
+	
+	The push refers to a repository [docker.io/mwalburn/pcf-ers-demo1]
+	da0f228fdb80: Pushing [===================>                               ] 15.76 MB/40.54 MB
+	f8cea7212cea: Pushing [======================>                            ] 17.89 MB/40.54 MB
+	a27c88827076: Layer already exists
+	58f7b9930e4f: Layer already exists
+	9007f5987db3: Layer already exists
