@@ -56,8 +56,12 @@ To enable memory and swap on system using GNU GRUB (GNU GRand Unified Bootloader
 1. Log into Ubuntu as a user with sudo privileges.
 2. Edit the `/etc/default/grub` file.
 3. Set the `GRUB_CMDLINE_LINUX` value as follows:
+
 	GRUB_CMDLINE_LINUX="cgroup\_enable=memory swapaccount=1"
+
 4. Save and close the file.
 5. Update GRUB.
+
 	$ sudo update-grub
+
 6. Reboot server
